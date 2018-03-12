@@ -1,0 +1,17 @@
+{
+  "title": "GV Header",
+  "author": "Gevorg Vahag",
+  "site": "http:\/\/bootydev.co.uk",
+  "version": "1.0",
+  "type": "unit",
+  "description": "Super header unit",
+  "have_setting": 1,
+  "image": "screenshot.png",
+  "slug": "studio_header",
+  "folder": "studio_header",
+  "created_at": 1490088665,
+  "is_core": 1,
+  "place": "frontend",
+  "tags": ["frontend_header","frontend","studio_header"],
+  "path": "app\/Plugins\/vendor\/btybug.hook\/newstudio\/src\/units\/studio_header"
+}
