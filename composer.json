@@ -1,10 +1,20 @@
 {
     "name": "btybug.hook/newstudio",
+    "type": "plugin",
+    "route": "newstudio",
     "authors": [
         {
             "name": "Eduard",
             "email": "edo.terakyan@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "BtyBugHook\\NewStudio\\": "src/"
+        },
+        "files": [
+            "src/index.php"
+        ]
+    }
 }
