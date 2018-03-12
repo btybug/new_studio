@@ -1,6 +1,6 @@
 <?php
 
-namespace BtyBugHook\Blog;
+namespace BtyBugHook\NewStudio;
 /**
  * Created by PhpStorm.
  * User: Edo
