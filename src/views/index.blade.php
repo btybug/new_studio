@@ -32,10 +32,10 @@
                 </div>
             </div>
             <div class="show-inp-drop ">
-                 <input type="text" class="form-control">
-                <div class="dropp">
-                    {!! Form::open(['url'=>'/','class'=>'dropzone', 'id'=>'my-awesome-dropzone']) !!}
 
+                <div class="dropp">
+                    {!! Form::open(['url'=>route('new_studio_upload'),'class'=>'dropzone', 'id'=>'my-awesome-dropzone']) !!}
+                    <input type="text" name="name" class="form-control">
                     {!! Form::close() !!}
                 </div>
 
@@ -196,17 +196,6 @@
             var textarea_editor_for_save = {};
             var html = $("#get_for_append").html();
             $(".append_here").html(html);
-            var data = JSON.parse($(".get_data").val());
-            if (html) {
-                var childs = $(".append_here").children("div.class_for_delete").children().children("div.parent").children();
-                if (childs.length) {
-                    childs.map(function (index, item) {
-                        var class_name = data[index].split("{")[0];
-                        class_name = class_name.split(".")[1];
-                        return $(item).addClass(class_name);
-                    });
-                }
-            }
 
             /*// initialize ace editors
                 data.map(function(item,indx){

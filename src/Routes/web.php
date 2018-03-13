@@ -23,4 +23,7 @@
 
 
 //Routes
-Route::get('/', 'IndexConroller@getIndex',true);
+Route::get('/', 'IndexController@getIndex',true)->name('new_studio');
+Route::post('/', 'IndexController@uploadStudio',true)->name('new_studio_upload');
+Route::post('/create-group', 'IndexController@createFolder')->name('create_studio_group');
+Route::post('/createfile/{dirname}', 'IndexController@createFile')->name('create_studio_create_file');
