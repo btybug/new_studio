@@ -37,20 +37,13 @@
                         </div>
                         <div class="panel-content collapse in" id="collapseOne_{{$index}}" aria-expanded="true">
                             <ul class="list-unstyled menuList m-t-10 components_list" data-role="componentslist">
-                                @if(count($directory["children"]))
-                                    @foreach($directory["children"] as $sub_group)
-                                        <?php
-                                        $original_name = explode('.', $sub_group->getFilename())[0];
-                                        ?>
+                                @if(count($directory["children_dirs"]))
+                                    @foreach($directory["children_dirs"] as $sub_group)
+
                                         <li class="custom_padding_left_0">
-                                            <a href="{{route("new_studio")}}?type={{$original_name}}" rel="tab"
-                                               class="tpl-left-items"> {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",explode('.',$sub_group->getFilename())[0]))}}</a>
-                                            <span class="inline-block pull-right">
-                                               {{-- <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
-                                                @if($original_name != "xl_large_text" && $original_name != "l_text" && $original_name != "m_text" && $original_name != "s_text" && $original_name != "xs_text" && $original_name != "link_text" && $original_name != "icons")
-                                                    <button class="btn btn-xs btn-danger remove_file" data-name="{{$original_name}}"><i class="fa fa-remove"></i></button>
-                                                @endif--}}
-                                            </span>
+                                            <a href="{{route("new_studio")}}?group={!! $directory["dirname"] !!}&type={{$sub_group['dirname']}}" rel="tab"
+                                               class="tpl-left-items"> {{$sub_group['dirname']}}</a>
+                                            <span class="inline-block pull-right"></span>
                                         </li>
                                     @endforeach
                                 @endif

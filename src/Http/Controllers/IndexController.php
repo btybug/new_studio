@@ -4,45 +4,59 @@ namespace BtyBugHook\NewStudio\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PhpJsonParser;
-use Btybug\Framework\Models\TableCss;
 use BtyBugHook\NewStudio\Models\NewStudios;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function getIndex(Request $request){
-        $path = plugins_path('vendor'.DS.'btybug.hook'.DS.'newstudio'.DS.'src'.DS.'storage'.DS.'studios');
+    public function getIndex(Request $request)
+    {
+        $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios');
         $directories = PhpJsonParser::getFoldersWithChildrens($path);
-        $slug = $request->get('type','icons');
-        $style_from_db = NewStudios::where("slug",$slug)->first();
-        return view('newstudio::index', compact(['slug','directories','style_from_db']));
+        $slug = $request->get('type');
+        $group = $request->get('group');
+        $studios = NewStudios::where("group", $group)->where('type', $slug)->get();
+        return view('newstudio::index', compact(['slug', 'directories', 'studios', 'group']));
     }
-    public function createFolder(){
-        $path = plugins_path('vendor'.DS.'btybug.hook'.DS.'newstudio'.DS.'src'.DS.'storage'.DS.'studios');
-        $new_folder_name = "new_".str_random(4).rand(111,999);
-        $full_path = $path.DS.$new_folder_name;
-        mkdir($full_path,0777);
+
+    public function createFolder()
+    {
+        $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios');
+        $new_folder_name = "new_" . str_random(4) . rand(111, 999);
+        $full_path = $path . DS . $new_folder_name;
+        mkdir($full_path, 0777);
         return response()->json(["dirname" => $new_folder_name]);
     }
-    public function createFile($dirname){
-        $path = plugins_path('vendor'.DS.'btybug.hook'.DS.'newstudio'.DS.'src'.DS.'storage'.DS.'studios'.DS.$dirname);
-        $file_name = "new_".str_random(4).rand(111,999);
-        $full_path = $path.DS.$file_name.".blade.php";
-        if (!\File::exists($full_path)){
-            \File::put($full_path,'');
-            $insert = new NewStudios();
-            $insert->slug = $file_name;
-            $insert->name = $file_name;
-            $insert->hint_path ='st_hint_path::'.$dirname.'.'.$file_name;
-            $insert->save();
-        }else{
+
+    public function createFile($dirname)
+    {
+        $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios' . DS . $dirname);
+        $folder_name = "new_" . str_random(4) . rand(111, 999);
+        $full_path = $path . DS . $folder_name;
+        if (!\File::isDirectory($full_path)) {
+            \File::makeDirectory($full_path);
+        } else {
             return response()->json(["error" => 1]);
         }
-        return response()->json(["error" => 0,"filename" => $file_name]);
+        return response()->json(["error" => 0, "filename" => $folder_name]);
     }
 
     public function uploadStudio(Request $request)
     {
-       dd($request->all());
+        $file = $request->file;
+        $file_name = $request->get('name', "new_" . str_random(4) . rand(111, 999));
+        $type = $request->get('type');
+        $group = $request->get('group');
+        $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios' . DS . $group . DS . $type);
+        if (\File::exists($path)) {
+            $file->move($path, $file_name.'.blade.php');
+            $insert = new NewStudios();
+            $insert->group = $group;
+            $insert->type = $type;
+            $insert->name = $file_name;
+            $insert->hint_path = 'st_hint_path::' . $group . '.' . $type . '.' . $file_name;
+            $insert->save();
+        }
+        return \Response::json(['error'=>false]);
     }
 }

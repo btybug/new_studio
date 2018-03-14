@@ -28,11 +28,20 @@
                     <button type="button" class="btn btn-info show_form"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
-            <div class="show-inp-drop ">
+            <div>
+                @foreach($studios as $studio)
+                    <div class="col-md-12">
+                        {!! $studio->name !!}
+                    </div>
 
+                @endforeach
+            </div>
+            <div class="show-inp-drop ">
                 <div class="dropp">
                     {!! Form::open(['url'=>route('new_studio_upload'),'class'=>'dropzone', 'id'=>'my-awesome-dropzone']) !!}
                     <input type="text" name="name" class="form-control">
+                    {!! Form::hidden('type',$slug) !!}
+                    {!! Form::hidden('group',$group) !!}
                     {!! Form::close() !!}
                 </div>
 

@@ -13,5 +13,5 @@ class NewStudios extends Model
 {
     protected $table = 'new_studios';
 
-    protected $fillable = ["name","hint_path","slug"];
+    protected $fillable = ["name","hint_path","group",'type'];
 }
