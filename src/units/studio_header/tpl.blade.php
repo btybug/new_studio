@@ -77,50 +77,60 @@
                 </select>
                 <div class="btn-group bootstrap-select form-control customselect">
                     <button type="button" class="btn dropdown-toggle selectpicker btn-menuSelect" data-toggle="dropdown"
-                            data-id="builderStudio" title="Text css"><span
-                                class="filter-option pull-left">Text css </span>&nbsp;<span class="caret"><i class="fa fa-angle-down"></i></span>
+                            data-id="builderStudio" title="Select Studio"><span
+                                class="filter-option pull-left">Select Studio </span>&nbsp;<span class="caret"><i class="fa fa-angle-down"></i></span>
                     </button>
                     <div class="dropdown-menu open">
                         <ul class="dropdown-menu inner selectpicker" role="menu">
-                            <li rel="0"><a tabindex="0" class="" style=""><span class="text">Menu Builder </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="1"><a tabindex="0" class="" style=""><span class="text">Container css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="2"><a tabindex="0" class="" style=""><span class="text">Button css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="3" class="selected"><a tabindex="0" class="" style=""><span
-                                            class="text">Text css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="4"><a tabindex="0" class="" style=""><span class="text">Icon css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="5"><a tabindex="0" class="" style=""><span class="text">Image css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="6"><a tabindex="0" class="" style=""><span class="text">Fields css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="7"><a tabindex="0" class="" style=""><span class="text">Animation css </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="8"><a tabindex="0" class="" style=""><span class="text">Panel </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="9"><a tabindex="0" class="" style=""><span class="text">Tab </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="10"><a tabindex="0" class="" style=""><span class="text">Fields Builder </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="11"><a tabindex="0" class="" style=""><span class="text">Color Builder </span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="12"><a tabindex="0" class="" style=""><span class="text">Theme studio</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="13"><a tabindex="0" class="" style=""><span class="text">Page Builder</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="14"><a tabindex="0" class="" style=""><span class="text">Unit Builder</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="15"><a tabindex="0" class="" style=""><span class="text">Form Builder</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="16"><a tabindex="0" class="" style=""><span class="text">Site Builder</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="17"><a tabindex="0" class="" style=""><span class="text">Image Edit</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
-                            <li rel="18"><a tabindex="0" class="" style=""><span class="text">Uploader</span><i
-                                            class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
+                            @if(isset($settings['studios']) && count($settings['studios']))
+                                @foreach($settings['studios'] as $id)
+                                    @php
+                                        $studio = get_studio($id);
+                                    @endphp
+                                    @if($studio)
+                                        <li rel="{{ $studio->id }}"><a tabindex="0" class="" style=""><span class="text">{{ $studio->name }}</span><i
+                                                        class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
+                                    @endif
+                                @endforeach
+                            @endif
+
+                            {{--<li rel="1"><a tabindex="0" class="" style=""><span class="text">Container css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="2"><a tabindex="0" class="" style=""><span class="text">Button css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="3" class="selected"><a tabindex="0" class="" style=""><span--}}
+                                            {{--class="text">Text css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="4"><a tabindex="0" class="" style=""><span class="text">Icon css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="5"><a tabindex="0" class="" style=""><span class="text">Image css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="6"><a tabindex="0" class="" style=""><span class="text">Fields css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="7"><a tabindex="0" class="" style=""><span class="text">Animation css </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="8"><a tabindex="0" class="" style=""><span class="text">Panel </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="9"><a tabindex="0" class="" style=""><span class="text">Tab </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="10"><a tabindex="0" class="" style=""><span class="text">Fields Builder </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="11"><a tabindex="0" class="" style=""><span class="text">Color Builder </span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="12"><a tabindex="0" class="" style=""><span class="text">Theme studio</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="13"><a tabindex="0" class="" style=""><span class="text">Page Builder</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="14"><a tabindex="0" class="" style=""><span class="text">Unit Builder</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="15"><a tabindex="0" class="" style=""><span class="text">Form Builder</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="16"><a tabindex="0" class="" style=""><span class="text">Site Builder</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="17"><a tabindex="0" class="" style=""><span class="text">Image Edit</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+                            {{--<li rel="18"><a tabindex="0" class="" style=""><span class="text">Uploader</span><i--}}
+                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
                         </ul>
                     </div>
                 </div>
