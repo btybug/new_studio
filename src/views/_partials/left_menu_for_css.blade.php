@@ -31,7 +31,7 @@
                                             data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
                                 @endif
                                 <a href="{{route("create_studio_create_file",$directory["dirname"])}}"
-                                   class="btn btn-sm btn-success custom_create_new_file"><i class="fa fa-plus"></i></a>
+                                   class="btn btn-sm btn-success custom_create_new_file" data-name="{!! $directory["dirname"] !!}"><i class="fa fa-plus"></i></a>
                                 </span>
                             <div class="clearfix"></div>
                         </div>
@@ -85,7 +85,7 @@
 </script>
 <script type="template" id="append_new_file">
     <li class="custom_padding_left_0">
-        <a href="{{route("new_studio")}}?type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
+        <a href="{{route("new_studio")}}?group={group}&type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
         {{--<span class="inline-block pull-right">
             <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-xs btn-danger remove_file" data-name="{fname}"><i class="fa fa-remove"></i></button>
@@ -151,6 +151,7 @@
                 if (!data.error) {
                     var name = titleCase(data.filename);
                     template = template.replace("{filename}", name).replace("{original_name}", data.filename).replace("{fname}", data.filename);
+                    template = template.replace("{group}",that.attr('data-name'));
                     return that.parents("div.panel.panel-default").children(".panel-content").children("ul.components_list").append(template);
                 }
             },
