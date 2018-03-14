@@ -13,9 +13,6 @@
         </div>
     @endif
     <div class="main_lay_cont">
-        {{--<div class="row for_title_row">--}}
-        {{--<h1 class="text-center">Components</h1>--}}
-        {{--</div>--}}
         <div class="col-md-3">
             <div class="">
                 @include("newstudio::_partials.left_menu_for_css")
@@ -50,58 +47,30 @@
                             <label for="filename">Item name</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" id="filename" name="filename" class="form-control" value="{{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",$slug))}}">
+                            <input type="text" id="filename" name="filename" class="form-control"
+                                   value="{{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",$slug))}}">
                         </div>
                         <div class="clearfix"></div>
 
-                    </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label for="">Item html</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea name="" id="html_val" cols="30" rows="10" class="hidden">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
-                            <textarea name="file_html" id="editor_html" cols="30" rows="10" class="form-control"></textarea>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
                 </div>
-                <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
-               
-                {!! Form::close() !!}
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label for="">Item html</label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea name="" id="html_val" cols="30" rows="10"
+                                  class="hidden">{!! isset($style_from_db) ? $style_from_db->html : '' !!}</textarea>
+                        <textarea name="file_html" id="editor_html" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
+            <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
 
-
-            {{-- <div class="form-comp col-md-12 custom_hidden is_show">
-                 {!! Form::open(['url'=>route('save_style'),'method' => 'post',"class" => "submit_form_for_style"]) !!}
-                     <div class="col-md-7">
-                         <div class="form-group">
-                             <div class="col-md-4">
-                                 <label for="">Class Code</label>
-                             </div>
-                             <div class="col-md-8">
-                                 <textarea name="code" id="editor" cols="30" rows="10" class="form-control this_very_textarea"></textarea>
-                                 <div class="clearfix"></div>
-                             </div>
-                             <div class="clearfix"></div>
-                         </div>
-                     </div>
-                     <input type="hidden" name="type" value="{{ app('request')->input('type') }}">
-                     <div class="col-md-5">
-                         <button class="btn btn-lg btn-success pull-right validate_textarea" type="button">Save</button>
-                     </div>
-                 {!! Form::close() !!}
-                 <div class="clearfix"></div>
-             </div>--}}
+            {!! Form::close() !!}
         </div>
-
-        <div class="row layouts_row">
-
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
-                @include("newstudio::_partials.partial_for_css_file")
-            </div>
-        </div>
+    </div>
     </div>
 @stop
 @section('CSS')
@@ -125,65 +94,80 @@
             background-color: #a0a0a0;
             color: white;
             padding: 20px;
-            position:absolute;
+            position: absolute;
             z-index: 9999999;
-            width:97%;
+            width: 97%;
         }
 
         .form-comp textarea {
             height: 150px !important;
         }
-        .custom_hidden{
+
+        .custom_hidden {
             display: none;
         }
-        .custom_div_width{
-            width:200px;
-            margin:10px 0px;
+
+        .custom_div_width {
+            width: 200px;
+            margin: 10px 0px;
         }
-        .code_textarea{
-            height:130px!important;
+
+        .code_textarea {
+            height: 130px !important;
         }
-        .custom_margin_left{
-            margin-left:15px;
+
+        .custom_margin_left {
+            margin-left: 15px;
         }
-        .error{
-            color:#a94442;
+
+        .error {
+            color: #a94442;
         }
-        .m-t-54{
-            margin-top:-54px;
+
+        .m-t-54 {
+            margin-top: -54px;
         }
-        @media (max-width: 992px){
-            .m-t-54{
-                margin-top:0;
+
+        @media (max-width: 992px) {
+            .m-t-54 {
+                margin-top: 0;
             }
         }
-        .ace_editor{
-            height:160px;
+
+        .ace_editor {
+            height: 160px;
             flex: 1;
         }
-        .set_border{
+
+        .set_border {
             border: 2px solid #FF0000;
         }
-        .custom_inline_block{
-            display:inline-block;
+
+        .custom_inline_block {
+            display: inline-block;
         }
-        .show-inp-drop{
+
+        .show-inp-drop {
             display: none;
             position: relative;
         }
-        .show-inp-drop.active{
+
+        .show-inp-drop.active {
             display: block;
         }
-        .show-inp-drop .form-control{
+
+        .show-inp-drop .form-control {
             border-radius: 0;
             position: absolute;
             top: -38px;
             left: 0;
         }
-        .show-inp-drop .dropp{
+
+        .show-inp-drop .dropp {
             margin-top: 38px;
         }
-        .show-inp-drop .dropp #my-awesome-dropzone .dz-default{
+
+        .show-inp-drop .dropp #my-awesome-dropzone .dz-default {
             margin-top: 7% !important;
         }
     </style>
@@ -280,7 +264,7 @@
             $("body").delegate(".custom_cancel", "click", function () {
                 $("div.just_html").html("");
             });
-          //  $('body').find(".submit_form_for_style").dropzone();
+            //  $('body').find(".submit_form_for_style").dropzone();
 
             Dropzone.options.myAwesomeDropzone = {
                 init: function () {
@@ -289,9 +273,9 @@
                     });
                 }
             };
-            $("body").delegate(".show_form","click",function(){
+            $("body").delegate(".show_form", "click", function () {
 
-                    $(".show-inp-drop").toggleClass('active');
+                $(".show-inp-drop").toggleClass('active');
             });
         });
     </script>

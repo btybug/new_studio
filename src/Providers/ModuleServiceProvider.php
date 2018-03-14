@@ -29,6 +29,9 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'newstudio');
         $this->loadViewsFrom(__DIR__ . '/../views', 'newstudio');
+
+        $this->loadTranslationsFrom(__DIR__ . '/../storage/studios', 'st_hint_path');
+        $this->loadViewsFrom(__DIR__ . '/../storage/studios', 'st_hint_path');
         \Eventy::action('admin.menus', [
             "title" => "New Studios",
             "custom-link" => "#",
