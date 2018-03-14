@@ -169,15 +169,19 @@
         }
         .show-inp-drop{
             display: none;
+            position: relative;
         }
         .show-inp-drop.active{
             display: block;
         }
         .show-inp-drop .form-control{
             border-radius: 0;
+            position: absolute;
+            top: -38px;
+            left: 0;
         }
         .show-inp-drop .dropp{
-            margin-top: 10px;
+            margin-top: 38px;
         }
         .show-inp-drop .dropp #my-awesome-dropzone .dz-default{
             margin-top: 7% !important;
