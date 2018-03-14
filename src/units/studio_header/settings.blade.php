@@ -18,7 +18,7 @@ $data = \BtyBugHook\NewStudio\Models\NewStudios::pluck('name','id')->toArray();
                             <label>Select studios</label>
                         </div>
                         <div class="col-md-9">
-                            {!! Form::select('studios[]',$data,null,
+                            {!! Form::select('studios[]',$data,(issetReturn($settings,'studios',[])),
                             ['class' => 'form-control pull-right select-dropdowns','multiple' => 'multiple']) !!}
                         </div>
                         <div class="clearfix"></div>
