@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $('body').on("click", ".select-type", function () {
+        var val = $(this).data('id');
+        var url = window.location.pathname + "?id=" + val;
+        window.location = url;
+    });
+
     var btnlinksign = $('.bty-btn-sign-up');
     var btylogreg = $('.bty-log-reg');
     btnlinksign.on('click', function () {

@@ -88,7 +88,7 @@
                                         $studio = get_studio($id);
                                     @endphp
                                     @if($studio)
-                                        <li rel="{{ $studio->id }}"><a tabindex="0" class="" style=""><span class="text">{{ $studio->name }}</span><i
+                                        <li rel="{{ $studio->id }}"><a tabindex="0" data-id="{{ $studio->id }}" class="select-type" style=""><span class="text">{{ $studio->name }}</span><i
                                                         class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
                                     @endif
                                 @endforeach
@@ -180,7 +180,18 @@
         </div>
     </section>
 </section>
+<section id="main-wrapper">
+    @php
+        $studio = null;
+        if(app('request')->input('id')){
+            $studio = get_studio(app('request')->input('id'));
+        }
+    @endphp
 
+    @if($studio)
+        @include($studio->hint_path)
+    @endif
+</section>
 {!! BBstyle($_this->path.DS.'css'.DS.'bootstrap-select.min.css') !!}
 {!! BBstyle($_this->path.DS.'css'.DS.'header.css') !!}
 
