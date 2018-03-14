@@ -26,6 +26,16 @@
     </div>
 </div>
 
+{!! HTML::style("public/css/select2/select2.min.css") !!}
+{!! HTML::script("public/js/select2/select2.full.min.js") !!}
+<script>
+    $(document).ready(function () {
+        $('.select-dropdowns').select2({
+            placeholder: 'Select versions'
+        });
+    });
+</script>
+
 
 
 
