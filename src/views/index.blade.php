@@ -29,6 +29,31 @@
                 </div>
             </div>
             <div>
+                <div class="list">
+                    <ul>
+                        <li>
+                            <div class="title">Name 1</div>
+                            <div class="button">
+                                <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="title">Name 2</div>
+                            <div class="button">
+                                <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="title">Name 3</div>
+                            <div class="button">
+                                <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 @foreach($studios as $studio)
                     <div class="col-md-12">
                         {!! $studio->name !!}
@@ -178,6 +203,51 @@
 
         .show-inp-drop .dropp #my-awesome-dropzone .dz-default {
             margin-top: 7% !important;
+        }
+
+        .list {
+            margin-top: 8px;
+        }
+
+        .list ul {
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 0 8px #00000096;
+            list-style: none;
+        }
+
+        .list li {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            justify-content: space-between;
+            background-color: #05103363;
+            border-bottom: 1px solid #fff;
+            align-items: center;
+            color: white;
+        }
+
+        .list li:last-of-type {
+            border: none;
+        }
+
+        .list .title {
+            margin-left: 10px;
+        }
+
+        .list .button {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .list .button a {
+            border-radius: 0;
         }
     </style>
     {!! HTML::style('public/js/dropzone/css/dropzone.min.css') !!}
