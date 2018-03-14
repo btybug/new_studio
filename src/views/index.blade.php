@@ -31,35 +31,18 @@
             <div>
                 <div class="list">
                     <ul>
+                        @foreach($studios as $studio)
                         <li>
-                            <div class="title">Name 1</div>
+                            <div class="title">{!! $studio->name !!}</div>
                             <div class="button">
                                 <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
                                 <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
                             </div>
                         </li>
-                        <li>
-                            <div class="title">Name 2</div>
-                            <div class="button">
-                                <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="title">Name 3</div>
-                            <div class="button">
-                                <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
-                @foreach($studios as $studio)
-                    <div class="col-md-12">
-                        {!! $studio->name !!}
-                    </div>
 
-                @endforeach
             </div>
             <div class="show-inp-drop ">
                 <div class="dropp">
@@ -347,8 +330,15 @@
 
             Dropzone.options.myAwesomeDropzone = {
                 init: function () {
-                    this.on("success", function (file) {
-                        location.reload();
+                    this.on("success", function (file,data) {
+                        if(data.error){
+                            var message;
+                            $.each(data.messages,function (k,v) {
+                                message+=v+'<br>';
+                            });
+                            alert(message);
+                        };
+                       location.reload();
                     });
                 }
             };
