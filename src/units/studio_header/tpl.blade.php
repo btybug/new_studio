@@ -193,7 +193,7 @@
     @endif
 </section>
 {!! BBstyle($_this->path.DS.'css'.DS.'bootstrap-select.min.css') !!}
-{!! BBstyle($_this->path.DS.'css'.DS.'header.css') !!}
+{!! BBstyle(plugins_path('vendor'.DS.'btybug.hook'.DS.'newstudio'.DS.'src'.DS.'assets').DS.'css'.DS.'header.css') !!}
 
 {!! BBscript($_this->path.DS.'js'.DS.'bootstrap-select.min.js') !!}
-{!! BBscript($_this->path.DS.'js'.DS.'main.js') !!}
+{!! BBscript(plugins_path('vendor'.DS.'btybug.hook'.DS.'newstudio'.DS.'src'.DS.'assets').DS.'js'.DS.'main.js') !!}
