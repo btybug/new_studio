@@ -21,7 +21,14 @@
         <div class="col-md-9">
             <div class=" headar-btn">
                 <div>
-                    <input type="text" value="{!! $slug !!}">
+                    <form action="">
+                        <div class="head-left">
+                            <input type="text" value="{!! $slug !!}">
+                            <button class="btn btn-sm btn-info"><i class="fa fa-check-square"></i></button>
+                        </div>
+
+                    </form>
+
                 </div>
                 <div>
                     <button class="btn btn-primary show_form_for_setting">Settings</button>
@@ -231,6 +238,22 @@
 
         .list .button a {
             border-radius: 0;
+        }
+        .head-left{
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-wrap: wrap;
+            color: #777;
+        }
+        .head-left button{
+            border-radius: 0;
+        }
+        .head-left input{
+            padding-left: 5px;
+            border: 1px solid transparent;
         }
     </style>
     {!! HTML::style('public/js/dropzone/css/dropzone.min.css') !!}
