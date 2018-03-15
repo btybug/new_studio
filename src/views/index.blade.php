@@ -21,7 +21,7 @@
         <div class="col-md-9">
             <div class=" headar-btn">
                 <div>
-                    {{\App\Http\Controllers\PhpJsonParser::renderName(explode("_",$slug))}}
+                    <input type="text" value="{!! $slug !!}">
                 </div>
                 <div>
                     <button class="btn btn-primary show_form_for_setting">Settings</button>
