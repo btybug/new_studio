@@ -14,4 +14,9 @@ class NewStudios extends Model
     protected $table = 'new_studios';
 
     protected $fillable = ["name","hint_path","group",'type'];
+
+    function editHintPath($old_name,$new_name){
+       $this->hint_path=str_replace($old_name,$new_name,$this->hint_path);
+       return  $this->save();
+    }
 }

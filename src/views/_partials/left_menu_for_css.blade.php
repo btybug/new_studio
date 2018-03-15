@@ -18,8 +18,8 @@
                                 <span class="title">{{$directory["dirname"]}}</span>
                             </a>
                             <span class="custom_hidden changeable_group_name">
-                                <input type="text" value="{{$directory["dirname"]}}">
-                                <button class="btn btn-sm btn-success go_to_save">
+                                <input type="text" value="{{$directory["dirname"]}}" data-val="{{$directory["dirname"]}}">
+                                <button class="btn btn-sm btn-success go_to_save" data-for="{{$directory["dirname"]}}">
                                     <i class="fa fa-check-square"></i>
                                 </button>
                             </span>
@@ -177,25 +177,29 @@
             type: 'POST'
         });
     });
-    /*$("body").delegate(".remove_file","click",function(){
-        var filename = $(this).data("name");
-        var that = $(this);
-        var _token = $('input[name=_token]').val();
-        var url = base_path + "/admin/framework/css-classes/removefile";
+    $('body').on('click','.go_to_save',function () {
+       var old_name=$(this).attr('data-for');
+       var new_name=$('body').find('input[data-val='+old_name+']').val();
+       var data={'old_name':old_name,'new_name':new_name};
         $.ajax({
-            url: url,
-            data: {
-                filename:filename,
-                _token: _token
+            url: '{!! route('new_studio_edit_group_name') !!}',
+            type: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $("input[name='_token']").val()
             },
             success: function (data) {
-                if(!data.error){
-                    that.parents("li.custom_padding_left_0").remove();
-                }
-            },
-            type: 'POST'
+                if (data.error) {
+                    var message;
+                    $.each(data.messages,function (k,v) {
+                        message+=v+'<br>';
+                    });
+                    alert(message);
+                };
+                location.reload();
+            }
         });
-    });*/
+    });
     $("body").delegate(".edit_folder_name", "click", function () {
         $(this).parent().prev().prev("a.accordion-toggle.colps").addClass('custom_hidden');
         return $(this).parent().prev(".changeable_group_name").removeClass("custom_hidden");

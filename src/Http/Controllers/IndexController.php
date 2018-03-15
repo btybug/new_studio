@@ -66,4 +66,28 @@ class IndexController extends Controller
         }
         return \Response::json(['error'=>false]);
     }
+
+    public function getEeditGroupName(Request $request)
+    {
+        $v=\Validator::make($request->all(),[
+            'old_name'=>'required',
+            'new_name'=>'required|alpha'
+        ]);
+        if($v->fails()){
+            return \Response::json(['error'=>true,'messages'=>$v->messages()]);
+        }
+        $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios' . DS . $request->get('old_name'));
+        $new_path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios' . DS . $request->get('new_name'));
+        if(\File::isDirectory($path) && !\File::isDirectory($new_path)){
+            $studios=NewStudios::where('group',$request->get('old_name'))->get();
+            foreach($studios as $studio){
+                $studio->editHintPath($request->get('old_name'),$request->get('new_name'));
+            };
+            \File::copyDirectory($path,$new_path);
+            \File::deleteDirectory($path);
+            return \Response::json(['error'=>false]);
+        }
+        return \Response::json(['error'=>true,'messages'=>['group exist!!!']]);
+
+    }
 }
