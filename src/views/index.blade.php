@@ -42,7 +42,10 @@
                         @foreach($studios as $studio)
                         <li>
                             <div class="title">{!! $studio->name !!}</div>
+                            <div class="title">{!! $studio->description !!}</div>
+                            <div class="title"><img width="100px" src="{!! url('public/images',$studio->image ) !!}"></div>
                             <div class="button">
+                                <a href="#" class="btn btn-info"><i class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
                                 <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
                             </div>
@@ -54,10 +57,23 @@
             </div>
             <div class="show-inp-drop ">
                 <div class="dropp">
-                    {!! Form::open(['url'=>route('new_studio_upload'),'class'=>'dropzone', 'id'=>'my-awesome-dropzone']) !!}
-                    <input type="text" name="name" class="form-control">
+                    {!! Form::open(['url'=>route('new_studio_upload'),'class'=>'','files'=>true]) !!}
+                    <div class="">
+                        <span>Studio Name</span>
+                        <input type="text" name="name" class="form-control">
+                        <span>Studio Image</span>
+                        <input type="file" name="image" class="form-control">
+                        <div>
+                        <span>Studio Description</span>
+                        <textarea name="description"></textarea>
+                        </div><br>
+                        <span>Studio File:</span>
+                        <input type="file" name="file" class="form-control">
+                    </div>
+
                     {!! Form::hidden('type',$slug) !!}
                     {!! Form::hidden('group',$group) !!}
+                    {!! Form::submit(null,['class'=>'btn btn-success']) !!}
                     {!! Form::close() !!}
                 </div>
 
@@ -114,7 +130,11 @@
             color: #fff;
             padding: 10px 15px;
         }
-
+.dropzone-form{
+    position: absolute;
+    top: 104px;
+    width: 100%;
+}
         .form-comp {
             background-color: #a0a0a0;
             color: white;
@@ -181,10 +201,11 @@
             display: block;
         }
 
-        .show-inp-drop .form-control {
+        .show-inp-drop .studio-data {
             border-radius: 0;
             position: absolute;
-            top: -38px;
+            top: -144px;
+            width: 100%;
             left: 0;
         }
 

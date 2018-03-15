@@ -45,8 +45,10 @@ class IndexController extends Controller
     {
         $v=\Validator::make($request->all(),[
             'file'=>'required|file',
-            'name'=>'required|alpha'
+            'name'=>'required|alpha',
+            'image'=>'file|image'
         ]);
+
         if($v->fails()){
             return \Response::json(['error'=>true,'messages'=>$v->messages()]);
         }
@@ -58,13 +60,15 @@ class IndexController extends Controller
         if (\File::exists($path)) {
             $file->move($path, $file_name.'.blade.php');
             $insert = new NewStudios();
+            $insert->uploadImage($request->image);
             $insert->group = $group;
             $insert->type = $type;
+            $insert->description = $request->get('description');
             $insert->name = $file_name;
             $insert->hint_path = 'st_hint_path::' . $group . '.' . $type . '.' . $file_name;
             $insert->save();
         }
-        return \Response::json(['error'=>false]);
+        return redirect()->back();
     }
 
     public function getEeditGroupName(Request $request)

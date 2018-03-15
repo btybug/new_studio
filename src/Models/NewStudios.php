@@ -13,10 +13,17 @@ class NewStudios extends Model
 {
     protected $table = 'new_studios';
 
-    protected $fillable = ["name","hint_path","group",'type'];
+    protected $fillable = ["name","hint_path","group",'type','image','description'];
 
     function editHintPath($old_name,$new_name){
        $this->hint_path=str_replace($old_name,$new_name,$this->hint_path);
        return  $this->save();
+    }
+
+    public function uploadImage($image)
+    {
+        $this->image = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/images');
+        $image->move($destinationPath, $this->image);
     }
 }
