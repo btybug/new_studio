@@ -28,3 +28,4 @@ Route::post('/', 'IndexController@uploadStudio',true)->name('new_studio_upload')
 Route::post('/create-group', 'IndexController@createFolder')->name('create_studio_group');
 Route::post('/createfile/{dirname}', 'IndexController@createFile')->name('create_studio_create_file');
 Route::post('/edit-group-name', 'IndexController@getEeditGroupName')->name('new_studio_edit_group_name');
+Route::post('/edit-sub-group-name', 'IndexController@getEeditSubGroupName')->name('new_studio_edit_sub_group_name');

@@ -18,7 +18,8 @@
                                 <span class="title">{{$directory["dirname"]}}</span>
                             </a>
                             <span class="custom_hidden changeable_group_name">
-                                <input type="text" value="{{$directory["dirname"]}}" data-val="{{$directory["dirname"]}}">
+                                <input type="text" value="{{$directory["dirname"]}}"
+                                       data-val="{{$directory["dirname"]}}">
                                 <button class="btn btn-sm btn-success go_to_save" data-for="{{$directory["dirname"]}}">
                                     <i class="fa fa-check-square"></i>
                                 </button>
@@ -31,7 +32,8 @@
                                             data-name="{{$directory["dirname"]}}"><i class="fa fa-remove"></i></button>
                                 @endif
                                 <a href="{{route("create_studio_create_file",$directory["dirname"])}}"
-                                   class="btn btn-sm btn-success custom_create_new_file" data-name="{!! $directory["dirname"] !!}"><i class="fa fa-plus"></i></a>
+                                   class="btn btn-sm btn-success custom_create_new_file"
+                                   data-name="{!! $directory["dirname"] !!}"><i class="fa fa-plus"></i></a>
                                 </span>
                             <div class="clearfix"></div>
                         </div>
@@ -41,7 +43,8 @@
                                     @foreach($directory["children_dirs"] as $sub_group)
 
                                         <li class="custom_padding_left_0">
-                                            <a href="{{route("new_studio")}}?group={!! $directory["dirname"] !!}&type={{$sub_group['dirname']}}" rel="tab"
+                                            <a href="{{route("new_studio")}}?group={!! $directory["dirname"] !!}&type={{$sub_group['dirname']}}"
+                                               rel="tab"
                                                class="tpl-left-items"> {{$sub_group['dirname']}}</a>
                                             <span class="inline-block pull-right"></span>
                                         </li>
@@ -85,7 +88,8 @@
 </script>
 <script type="template" id="append_new_file">
     <li class="custom_padding_left_0">
-        <a href="{{route("new_studio")}}?group={group}&type={original_name}" rel="tab" class="tpl-left-items">{filename}</a>
+        <a href="{{route("new_studio")}}?group={group}&type={original_name}" rel="tab"
+           class="tpl-left-items">{filename}</a>
         {{--<span class="inline-block pull-right">
             <button class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
             <button class="btn btn-xs btn-danger remove_file" data-name="{fname}"><i class="fa fa-remove"></i></button>
@@ -151,7 +155,7 @@
                 if (!data.error) {
                     var name = titleCase(data.filename);
                     template = template.replace("{filename}", name).replace("{original_name}", data.filename).replace("{fname}", data.filename);
-                    template = template.replace("{group}",that.attr('data-name'));
+                    template = template.replace("{group}", that.attr('data-name'));
                     return that.parents("div.panel.panel-default").children(".panel-content").children("ul.components_list").append(template);
                 }
             },
@@ -177,10 +181,10 @@
             type: 'POST'
         });
     });
-    $('body').on('click','.go_to_save',function () {
-       var old_name=$(this).attr('data-for');
-       var new_name=$('body').find('input[data-val='+old_name+']').val();
-       var data={'old_name':old_name,'new_name':new_name};
+    $('body').on('click', '.go_to_save', function () {
+        var old_name = $(this).attr('data-for');
+        var new_name = $('body').find('input[data-val=' + old_name + ']').val();
+        var data = {'old_name': old_name, 'new_name': new_name};
         $.ajax({
             url: '{!! route('new_studio_edit_group_name') !!}',
             type: 'POST',
@@ -191,12 +195,13 @@
             success: function (data) {
                 if (data.error) {
                     var message;
-                    $.each(data.messages,function (k,v) {
-                        message+=v+'<br>';
+                    $.each(data.messages, function (k, v) {
+                        message += v + '<br>';
                     });
                     alert(message);
+                  return false;
                 };
-                location.reload();
+                window.location = data.url;
             }
         });
     });

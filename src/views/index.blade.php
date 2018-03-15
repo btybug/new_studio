@@ -21,13 +21,14 @@
         <div class="col-md-9">
             <div class=" headar-btn">
                 <div>
-                    <form action="">
+                    {!! Form::open(['id'=>'edit_sub_group']) !!}
                         <div class="head-left">
-                            <input type="text" value="{!! $slug !!}">
-                            <button class="btn btn-sm btn-info"><i class="fa fa-check-square"></i></button>
+                            <input type="text" name="new_name" value="{!! $slug !!}">
+                            <button type="button" class="btn btn-sm btn-info edit_sub_group_btn"><i class="fa fa-check-square"></i></button>
                         </div>
-
-                    </form>
+                    {!! Form::hidden('group',$group) !!}
+                    {!! Form::hidden('old_name',$slug) !!}
+                    {!! Form::close() !!}
 
                 </div>
                 <div>
@@ -259,28 +260,12 @@
     {!! HTML::style('public/js/dropzone/css/dropzone.min.css') !!}
 @stop
 @section('JS')
-    {{--{!! HTML::script('public/js/bty.js?v='.rand(1111,9999)) !!}--}}
-
-
-
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
     <script>
         $(document).ready(function () {
             var textarea_editor_for_save = {};
             var html = $("#get_for_append").html();
             $(".append_here").html(html);
-
-            /*// initialize ace editors
-                data.map(function(item,indx){
-                    if(item.length){
-                        var name = "editor_" + indx;
-                        name = ace.edit("textarea_"+indx);
-                        name.setTheme("ace/theme/monokai");
-                        name.session.setMode("ace/mode/css");
-                        name.setValue(item+"}");
-                    }
-                });
-            // end initialize ace editors*/
 
             $("body").delegate(".remove_this_class", "click", function () {
                 var slug = $(this).data("slug");
@@ -310,46 +295,27 @@
                 $("div.just_for_edit").html("");
                 $(this).parents("div.class_for_delete").children("div.just_for_edit").html("<div class='bordered'>" + content + "}" + "</div><div class='clearfix'></div>");
             });
-
-            $("body").delegate(".show_in_just_html_for_edit", "click", function () {
-                var style = $(this).data("class");
-                var slug = $(this).data("slug");
-
-                var class_name = style.split("{")[0];
-                class_name = class_name.split(".")[1];
-
-                var content = $("#send_form_for_edit").html();
-                content = content.replace("{repl_classname}", "." + class_name).replace("{repl_style}", style + "}").replace("{repl_slug}", slug).replace("{repl_original}", style + "}");
-                $("div.just_for_edit").html("");
-                $(this).parents("div.class_for_delete").children("div.just_for_edit").html(content).find("div.parent").children().addClass(class_name);
-
-                textarea_editor_for_save = ace.edit("textarea_editor_for_save");
-                textarea_editor_for_save.setTheme("ace/theme/monokai");
-                textarea_editor_for_save.session.setMode("ace/mode/css");
-                textarea_editor_for_save.setValue(style + "}");
-                textarea_editor_for_save.on("focus", function () {
-                    textarea_editor_for_save.unsetStyle("set_border");
+            $('body').on('click','.edit_sub_group_btn',function () {
+               var data=$('#edit_sub_group').serialize()
+                $.ajax({
+                    url: '{!! route('new_studio_edit_sub_group_name') !!}',
+                    type: 'POST',
+                    data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    success: function (data) {
+                        if (data.error) {
+                            var message;
+                            $.each(data.messages,function (k,v) {
+                            });
+                            alert(message);
+                            return false;
+                        };
+                        window.location = data.url;
+                    }
                 });
             });
-            $("body").delegate(".check_and_submit", "click", function () {
-                var editor_value = textarea_editor_for_save.getValue();
-                var annot = textarea_editor_for_save.getSession().getAnnotations();
-                for (var key in annot) {
-                    if (annot.hasOwnProperty(key)) {
-                        return textarea_editor_for_save.setStyle("set_border");
-                    }
-                }
-                if (!editor_value) {
-                    return textarea_editor_for_save.setStyle("set_border");
-                }
-                return (
-                    $(".submit_form_for_style_edit").append("<input type='hidden' name='changed_style' value='" + editor_value + "'>").submit()
-                );
-            });
-            $("body").delegate(".custom_cancel", "click", function () {
-                $("div.just_html").html("");
-            });
-            //  $('body').find(".submit_form_for_style").dropzone();
 
             Dropzone.options.myAwesomeDropzone = {
                 init: function () {
@@ -366,7 +332,6 @@
                 }
             };
             $("body").delegate(".show_form", "click", function () {
-
                 $(".show-inp-drop").toggleClass('active');
             });
         });

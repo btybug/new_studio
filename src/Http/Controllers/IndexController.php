@@ -81,11 +81,38 @@ class IndexController extends Controller
         if(\File::isDirectory($path) && !\File::isDirectory($new_path)){
             $studios=NewStudios::where('group',$request->get('old_name'))->get();
             foreach($studios as $studio){
+                $studio->group=$request->get('new_name');
                 $studio->editHintPath($request->get('old_name'),$request->get('new_name'));
             };
             \File::copyDirectory($path,$new_path);
             \File::deleteDirectory($path);
-            return \Response::json(['error'=>false]);
+            return \Response::json(['error'=>false,'url'=>route('new_studio').'?group='.$request->get('new_name')]);
+        }
+        return \Response::json(['error'=>true,'messages'=>['group exist!!!']]);
+
+    }
+    public function getEeditSubGroupName(Request $request)
+    {
+        $v=\Validator::make($request->all(),[
+            'old_name'=>'required',
+            'new_name'=>'required|alpha',
+            'group'=>'required',
+        ]);
+        if($v->fails()){
+            return \Response::json(['error'=>true,'messages'=>$v->messages()]);
+        }
+        $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios' . DS . $request->get('group'). DS . $request->get('old_name'));
+        $new_path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios' . DS .$request->get('group'). DS.$request->get('new_name'));
+
+        if(\File::isDirectory($path) && !\File::isDirectory($new_path)){
+            $studios=NewStudios::where('group',$request->get('group'))->where('type',$request->get('old_name'))->get();
+            foreach($studios as $studio){
+                $studio->type=$request->get('new_name');
+                $studio->editHintPath($request->get('old_name'),$request->get('new_name'));
+            };
+            \File::copyDirectory($path,$new_path);
+            \File::deleteDirectory($path);
+            return \Response::json(['error'=>false,'url'=>route('new_studio').'?group='.$request->get('group').'&type='.$request->get('new_name')]);
         }
         return \Response::json(['error'=>true,'messages'=>['group exist!!!']]);
 
