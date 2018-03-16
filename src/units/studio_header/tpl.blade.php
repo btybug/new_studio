@@ -134,7 +134,8 @@
                                                                          type="submit" value="Login">
                                 {!! Form::close() !!}
                                 @else
-                                    <a href="{!! url('logout') !!}"  class="btn btn-default btn-black2 dropdown-toggle"> logout </a>
+                                    <a href="{!! url('logout') !!}" class="btn btn-default btn-black2 dropdown-toggle">
+                                        logout </a>
                                 @endif
                             </div>
                     </div>
