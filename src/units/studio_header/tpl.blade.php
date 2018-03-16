@@ -94,48 +94,10 @@
                                 @endforeach
                             @endif
 
-                            {{--<li rel="1"><a tabindex="0" class="" style=""><span class="text">Container css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="2"><a tabindex="0" class="" style=""><span class="text">Button css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="3" class="selected"><a tabindex="0" class="" style=""><span--}}
-                                            {{--class="text">Text css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="4"><a tabindex="0" class="" style=""><span class="text">Icon css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="5"><a tabindex="0" class="" style=""><span class="text">Image css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="6"><a tabindex="0" class="" style=""><span class="text">Fields css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="7"><a tabindex="0" class="" style=""><span class="text">Animation css </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="8"><a tabindex="0" class="" style=""><span class="text">Panel </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="9"><a tabindex="0" class="" style=""><span class="text">Tab </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="10"><a tabindex="0" class="" style=""><span class="text">Fields Builder </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="11"><a tabindex="0" class="" style=""><span class="text">Color Builder </span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="12"><a tabindex="0" class="" style=""><span class="text">Theme studio</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="13"><a tabindex="0" class="" style=""><span class="text">Page Builder</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="14"><a tabindex="0" class="" style=""><span class="text">Unit Builder</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="15"><a tabindex="0" class="" style=""><span class="text">Form Builder</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="16"><a tabindex="0" class="" style=""><span class="text">Site Builder</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="17"><a tabindex="0" class="" style=""><span class="text">Image Edit</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
-                            {{--<li rel="18"><a tabindex="0" class="" style=""><span class="text">Uploader</span><i--}}
-                                            {{--class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>--}}
+
                         </ul>
                     </div>
                 </div>
-
-                <!--<button type="button" class="toolsbtn"><i class="iconheadersprite iconBuilder"></i> Site Builder</button>-->
 
             </div>
             <div class="col-xs-4 col-sm-4 loginMobilePosition">
@@ -147,10 +109,6 @@
                         </a>
                     </div>
                     <div class="menuIcons">
-                        <!--<a href="#" class="btn save-button hide" data-openpopup="savebutton" >Save</a>
-                                                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn save-button open-login">Save</a>
-                                                        <a href="#" class="btn save-as-button hide" data-openpopup="savebutton">Save As</a> -->
-
                     </div>
                 </div>
                 <div class="loginCol">
@@ -159,9 +117,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Login <span
                                     class="caret"></span></button>
                         <div class="dropdown-menu dropdown-menu-right dropdowncontainer p-10">
-                            <form method="POST" action="http://builders.bootydev.co.uk/studios/bbeditor/classes/text"
-                                  accept-charset="UTF-8" id="studio-login-form"><input name="_token" type="hidden"
-                                                                                       value="LAaSUc2rnlpHRmmhBA3L1Wo5cKgSgSQWFs4Hliwb">
+                            {!! Form::open(['url'=>url('login'),'id'=>'studio-login-form']) !!}
                                 <div class="form-group"><input class="form-control" placeholder="Username or Email"
                                                                name="usernameOremail" type="text"></div>
                                 <div class="form-group"><input class="form-control" placeholder="Password"
@@ -172,7 +128,7 @@
                                 </div>
                                 <span class="login-error"></span> <input class="btn btn-black2 btn-block login-studio"
                                                                          type="submit" value="Login">
-                            </form>
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
