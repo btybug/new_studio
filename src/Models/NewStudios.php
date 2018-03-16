@@ -23,7 +23,19 @@ class NewStudios extends Model
     public function uploadImage($image)
     {
         $this->image = time().'.'.$image->getClientOriginalExtension();
-        $destinationPath = public_path('/images');
+        $destinationPath = public_path('/images'.DS.'new_studios');
+        if(!\File::isDirectory($destinationPath)){
+            \File::makeDirectory($destinationPath);
+        }
         $image->move($destinationPath, $this->image);
+        return $this->image;
+    }
+    public function changeUploadedImage($image)
+    {
+        $destinationPath = public_path('/images'.DS.'new_studios');
+        \File::delete($destinationPath.DS.$this->image);
+        $this->image = time().'.'.$image->getClientOriginalExtension();
+        $image->move($destinationPath, $this->image);
+        return $this->image;
     }
 }

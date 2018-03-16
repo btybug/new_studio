@@ -29,3 +29,5 @@ Route::post('/create-group', 'IndexController@createFolder')->name('create_studi
 Route::post('/createfile/{dirname}', 'IndexController@createFile')->name('create_studio_create_file');
 Route::post('/edit-group-name', 'IndexController@getEeditGroupName')->name('new_studio_edit_group_name');
 Route::post('/edit-sub-group-name', 'IndexController@getEeditSubGroupName')->name('new_studio_edit_sub_group_name');
+Route::post('/edit-studio-form', 'IndexController@getEeditStudioForm')->name('new_studio_edit_studio_form');
+Route::post('/edit-studio', 'IndexController@getEeditStudio')->name('new_studio_edit_studio');

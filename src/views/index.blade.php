@@ -22,10 +22,11 @@
             <div class=" headar-btn">
                 <div>
                     {!! Form::open(['id'=>'edit_sub_group']) !!}
-                        <div class="head-left">
-                            <input type="text" name="new_name" value="{!! $slug !!}">
-                            <button type="button" class="btn btn-sm btn-info edit_sub_group_btn"><i class="fa fa-check-square"></i></button>
-                        </div>
+                    <div class="head-left">
+                        <input type="text" name="new_name" value="{!! $slug !!}">
+                        <button type="button" class="btn btn-sm btn-info edit_sub_group_btn"><i
+                                    class="fa fa-check-square"></i></button>
+                    </div>
                     {!! Form::hidden('group',$group) !!}
                     {!! Form::hidden('old_name',$slug) !!}
                     {!! Form::close() !!}
@@ -40,21 +41,24 @@
                 <div class="list">
                     <ul>
                         @foreach($studios as $studio)
-                        <li>
-                            <div class="title">{!! $studio->name !!}</div>
-                            <div class="title">{!! $studio->description !!}</div>
-                            <div class="title"><img width="100px" src="{!! url('public/images',$studio->image ) !!}"></div>
-                            <div class="button">
-                                <a href="#" class="btn btn-info"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
-                            </div>
-                        </li>
+                            <li>
+                                <div class="title">{!! $studio->name !!}</div>
+                                <div class="title">{!! $studio->description !!}</div>
+                                <div class="title"><img width="100px"
+                                                        src="{!! url('public/images/new_studios',$studio->image ) !!}"></div>
+                                <div class="button">
+                                    <button data-id="{!! $studio->id !!}" class="btn btn-info edit-studio-btn"><i
+                                                class="fa fa-edit"></i></button>
+                                    <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
+                                    <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                                </div>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
 
             </div>
+            <div class="edit-form-area"></div>
             <div class="show-inp-drop ">
                 <div class="dropp">
                     {!! Form::open(['url'=>route('new_studio_upload'),'class'=>'','files'=>true]) !!}
@@ -62,7 +66,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Studio Name</label>
                             <div class="col-md-8">
-                               <input type="text" name="name" class="form-control">
+                                <input type="text" name="name" class="form-control">
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -148,11 +152,13 @@
             color: #fff;
             padding: 10px 15px;
         }
-.dropzone-form{
-    position: absolute;
-    top: 104px;
-    width: 100%;
-}
+
+        .dropzone-form {
+            position: absolute;
+            top: 104px;
+            width: 100%;
+        }
+
         .form-comp {
             background-color: #a0a0a0;
             color: white;
@@ -234,7 +240,8 @@
         .show-inp-drop .dropp #my-awesome-dropzone .dz-default {
             margin-top: 7% !important;
         }
-        .dropp .form-horizontal{
+
+        .dropp .form-horizontal {
             background-color: #fff;
             padding: 27px 0;
             box-shadow: 0 0 4px #444;
@@ -284,7 +291,8 @@
         .list .button a {
             border-radius: 0;
         }
-        .head-left{
+
+        .head-left {
             display: -webkit-box;
             display: -moz-box;
             display: -ms-flexbox;
@@ -293,10 +301,12 @@
             flex-wrap: wrap;
             color: #777;
         }
-        .head-left button{
+
+        .head-left button {
             border-radius: 0;
         }
-        .head-left input{
+
+        .head-left input {
             padding-left: 5px;
             border: 1px solid transparent;
         }
@@ -339,8 +349,8 @@
                 $("div.just_for_edit").html("");
                 $(this).parents("div.class_for_delete").children("div.just_for_edit").html("<div class='bordered'>" + content + "}" + "</div><div class='clearfix'></div>");
             });
-            $('body').on('click','.edit_sub_group_btn',function () {
-               var data=$('#edit_sub_group').serialize()
+            $('body').on('click', '.edit_sub_group_btn', function () {
+                var data = $('#edit_sub_group').serialize()
                 $.ajax({
                     url: '{!! route('new_studio_edit_sub_group_name') !!}',
                     type: 'POST',
@@ -351,27 +361,43 @@
                     success: function (data) {
                         if (data.error) {
                             var message;
-                            $.each(data.messages,function (k,v) {
+                            $.each(data.messages, function (k, v) {
                             });
                             alert(message);
                             return false;
-                        };
+                        }
+                        ;
                         window.location = data.url;
                     }
                 });
             });
-
+            $('.edit-studio-btn').on('click', function () {
+                var data = {'id': $(this).attr('data-id')};
+                $.ajax({
+                    url: '{!! route('new_studio_edit_studio_form') !!}',
+                    type: 'POST',
+                    data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $('.edit-form-area').html(data.html);
+                        }
+                    }
+                });
+            });
             Dropzone.options.myAwesomeDropzone = {
                 init: function () {
-                    this.on("success", function (file,data) {
-                        if(data.error){
+                    this.on("success", function (file, data) {
+                        if (data.error) {
                             var message;
-                            $.each(data.messages,function (k,v) {
-                                message+=v+'<br>';
+                            $.each(data.messages, function (k, v) {
+                                message += v + '<br>';
                             });
                             alert(message);
                         };
-                       location.reload();
+                        location.reload();
                     });
                 }
             };
