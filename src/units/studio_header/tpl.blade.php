@@ -166,7 +166,7 @@
 <style>
     .logedCol{
         float: right;
-        margin: 15px 20px 0 0;
+        margin-top: 5px;
     }
     .logedCol>a{
         font-size: 14px;
@@ -174,7 +174,7 @@
         text-decoration: none;
     }
     .logedCol .dropdown-menu{
-        min-width: auto;
+        min-width: 100%;
     }
 </style>
 {!! BBstyle($_this->path.DS.'css'.DS.'bootstrap-select.min.css') !!}
