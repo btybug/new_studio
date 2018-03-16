@@ -134,9 +134,7 @@
                                                                          type="submit" value="Login">
                                 {!! Form::close() !!}
                                 @else
-                                    <a href="{!! url('logout') !!}" id="dropdown-login" class="btn btn-default btn-black2 dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> logout <span
-                                                class="caret"></span></a>
+                                    <a href="{!! url('logout') !!}"  class="btn btn-default btn-black2 dropdown-toggle"> logout </a>
                                 @endif
                             </div>
                     </div>
