@@ -78,7 +78,8 @@
                 <div class="btn-group bootstrap-select form-control customselect">
                     <button type="button" class="btn dropdown-toggle selectpicker btn-menuSelect" data-toggle="dropdown"
                             data-id="builderStudio" title="Select Studio"><span
-                                class="filter-option pull-left">Select Studio </span>&nbsp;<span class="caret"><i class="fa fa-angle-down"></i></span>
+                                class="filter-option pull-left">Select Studio </span>&nbsp;<span class="caret"><i
+                                    class="fa fa-angle-down"></i></span>
                     </button>
                     <div class="dropdown-menu open">
                         <ul class="dropdown-menu inner selectpicker" role="menu">
@@ -88,7 +89,9 @@
                                         $studio = get_studio($id);
                                     @endphp
                                     @if($studio)
-                                        <li rel="{{ $studio->id }}"><a tabindex="0" data-id="{{ $studio->id }}" class="select-type" style=""><span class="text">{{ $studio->name }}</span><i
+                                        <li rel="{{ $studio->id }}"><a tabindex="0" data-id="{{ $studio->id }}"
+                                                                       class="select-type" style=""><span
+                                                        class="text">{{ $studio->name }}</span><i
                                                         class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
                                     @endif
                                 @endforeach
@@ -113,11 +116,12 @@
                 </div>
                 <div class="loginCol">
                     <div class="btn-group">
-                        <button type="button" id="dropdown-login" class="btn btn-default btn-black2 dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Login <span
-                                    class="caret"></span></button>
-                        <div class="dropdown-menu dropdown-menu-right dropdowncontainer p-10">
-                            {!! Form::open(['url'=>url('login'),'id'=>'studio-login-form']) !!}
+                        @if(!Auth::check())
+                            <button type="button" id="dropdown-login" class="btn btn-default btn-black2 dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Login <span
+                                        class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right dropdowncontainer p-10">
+                                {!! Form::open(['url'=>url('login'),'id'=>'studio-login-form']) !!}
                                 <div class="form-group"><input class="form-control" placeholder="Username or Email"
                                                                name="usernameOremail" type="text"></div>
                                 <div class="form-group"><input class="form-control" placeholder="Password"
@@ -128,8 +132,13 @@
                                 </div>
                                 <span class="login-error"></span> <input class="btn btn-black2 btn-block login-studio"
                                                                          type="submit" value="Login">
-                            {!! Form::close() !!}
-                        </div>
+                                {!! Form::close() !!}
+                                @else
+                                    <a href="{!! url('logout') !!}" id="dropdown-login" class="btn btn-default btn-black2 dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> logout <span
+                                                class="caret"></span></a>
+                                @endif
+                            </div>
                     </div>
                 </div>
             </div>
