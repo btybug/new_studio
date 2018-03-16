@@ -114,15 +114,6 @@
                     <div class="menuIcons">
                     </div>
                 </div>
-                <div class="dropdown logedCol">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Name<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">My Acount</a></li>
-                        <li><a href="#">Other</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Log out</a></li>
-                    </ul>
-                </div>
                 <div class="loginCol">
                     <div class="btn-group">
                         @if(!Auth::check())
@@ -143,8 +134,15 @@
                                                                          type="submit" value="Login">
                                 {!! Form::close() !!}
                                 @else
-                                    <a href="{!! url('logout') !!}" class="btn btn-default btn-black2 dropdown-toggle">
-                                        logout </a>
+                                    <div class="dropdown logedCol">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!! BBGetUser() !!}<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">My Acount</a></li>
+                                            <li><a href="#">Other</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="{!! url('logout') !!}">Log out</a></li>
+                                        </ul>
+                                    </div>
                                 @endif
                             </div>
                     </div>
