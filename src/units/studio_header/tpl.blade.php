@@ -132,6 +132,7 @@
                                 </div>
                                 <span class="login-error"></span> <input class="btn btn-black2 btn-block login-studio"
                                                                          type="submit" value="Login">
+                                <input type="hidden" name="redirect_to" value="{!! url()->current() !!}">
                                 {!! Form::close() !!}
                                 @else
                                     <div class="dropdown logedCol">
