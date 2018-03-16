@@ -114,6 +114,15 @@
                     <div class="menuIcons">
                     </div>
                 </div>
+                <div class="dropdown logedCol">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Name<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Acount</a></li>
+                        <li><a href="#">Other</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Log out</a></li>
+                    </ul>
+                </div>
                 <div class="loginCol">
                     <div class="btn-group">
                         @if(!Auth::check())
@@ -156,6 +165,20 @@
         @include($studio->hint_path)
     @endif
 </section>
+<style>
+    .logedCol{
+        float: right;
+        margin: 15px 20px 0 0;
+    }
+    .logedCol>a{
+        font-size: 14px;
+        color: white;
+        text-decoration: none;
+    }
+    .logedCol .dropdown-menu{
+        min-width: auto;
+    }
+</style>
 {!! BBstyle($_this->path.DS.'css'.DS.'bootstrap-select.min.css') !!}
 {!! BBstyle(plugins_path('vendor'.DS.'btybug.hook'.DS.'newstudio'.DS.'src'.DS.'assets').DS.'css'.DS.'header.css') !!}
 

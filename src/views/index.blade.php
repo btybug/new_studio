@@ -58,22 +58,40 @@
             <div class="show-inp-drop ">
                 <div class="dropp">
                     {!! Form::open(['url'=>route('new_studio_upload'),'class'=>'','files'=>true]) !!}
-                    <div class="">
-                        <span>Studio Name</span>
-                        <input type="text" name="name" class="form-control">
-                        <span>Studio Image</span>
-                        <input type="file" name="image" class="form-control">
-                        <div>
-                        <span>Studio Description</span>
-                        <textarea name="description"></textarea>
-                        </div><br>
-                        <span>Studio File:</span>
-                        <input type="file" name="file" class="form-control">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Studio Name</label>
+                            <div class="col-md-8">
+                               <input type="text" name="name" class="form-control">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Studio Image</label>
+                            <div class="col-md-8">
+                                <input type="file" name="image" class="form-control">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Studio Description</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="description"></textarea>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Studio File:</label>
+                            <div class="col-md-8">
+                                <input type="file" name="file" class="form-control">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
 
                     {!! Form::hidden('type',$slug) !!}
                     {!! Form::hidden('group',$group) !!}
-                    {!! Form::submit(null,['class'=>'btn btn-success']) !!}
+                    {!! Form::submit(null,['class'=>'btn btn-success pull-right']) !!}
                     {!! Form::close() !!}
                 </div>
 
@@ -210,11 +228,16 @@
         }
 
         .show-inp-drop .dropp {
-            margin-top: 38px;
+            /*margin-top: 38px;*/
         }
 
         .show-inp-drop .dropp #my-awesome-dropzone .dz-default {
             margin-top: 7% !important;
+        }
+        .dropp .form-horizontal{
+            background-color: #fff;
+            padding: 27px 0;
+            box-shadow: 0 0 4px #444;
         }
 
         .list {
