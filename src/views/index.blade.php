@@ -50,7 +50,10 @@
                                     <button data-id="{!! $studio->id !!}" class="btn btn-info edit-studio-btn"><i
                                                 class="fa fa-edit"></i></button>
                                     <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
-                                    <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                                    {!! Form::open(['url'=>route('new_studios_delete'),'class'=>'delete-studio']) !!}
+                                    {!! Form::hidden('id',$studio->id) !!}
+                                    <button type="submit" value="0" data-role="delete-studio-btn" class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                    {!! Form::close() !!}
                                 </div>
                             </li>
                         @endforeach
@@ -404,6 +407,14 @@
                     });
                 }
             };
+            $(".delete-studio").submit(function() {
+                var button=$(this).find("button[data-role='delete-studio-btn']");
+                if (button.val() == "0") {
+                    alert("Please confirm if everything is correct");
+                    button.val("1");
+                    return false;
+                }
+            });
             $("body").delegate(".show_form", "click", function () {
                 $(".show-inp-drop").toggleClass('active');
             });

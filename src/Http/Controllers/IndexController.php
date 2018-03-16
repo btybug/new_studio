@@ -5,6 +5,7 @@ namespace BtyBugHook\NewStudio\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PhpJsonParser;
 use BtyBugHook\NewStudio\Models\NewStudios;
+use BtyBugHook\NewStudio\Repository\NewStudiosRepository;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -155,6 +156,14 @@ class IndexController extends Controller
             $data['image'] = $studio->changeUploadedImage($image);
         }
         $studio->update($data);
+        return redirect()->back();
+
+    }
+
+    public function getDeleteStudio(Request $request,NewStudiosRepository $repository)
+    {
+        $id=$request->id;
+        $repository->delete($id);
         return redirect()->back();
 
     }

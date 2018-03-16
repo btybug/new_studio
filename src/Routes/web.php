@@ -31,3 +31,4 @@ Route::post('/edit-group-name', 'IndexController@getEeditGroupName')->name('new_
 Route::post('/edit-sub-group-name', 'IndexController@getEeditSubGroupName')->name('new_studio_edit_sub_group_name');
 Route::post('/edit-studio-form', 'IndexController@getEeditStudioForm')->name('new_studio_edit_studio_form');
 Route::post('/edit-studio', 'IndexController@getEeditStudio')->name('new_studio_edit_studio');
+Route::post('/delete-studio', 'IndexController@getDeleteStudio')->name('new_studios_delete');
