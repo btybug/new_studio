@@ -387,6 +387,9 @@
                     }
                 });
             });
+            $('body').on('click','.cancel-edit-studio',function () {
+                $('.edit-form-area').empty();
+            });
             Dropzone.options.myAwesomeDropzone = {
                 init: function () {
                     this.on("success", function (file, data) {

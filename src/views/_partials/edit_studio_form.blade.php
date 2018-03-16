@@ -1,4 +1,4 @@
-<div class="dropp">
+<div class="dropp edit-studio-container">
     {!! Form::model($studio,['url'=>route('new_studio_edit_studio'),'class'=>'','files'=>true]) !!}
     <div class="form-horizontal">
         <div class="form-group">
@@ -31,6 +31,7 @@
         </div>
     </div>
     {!! Form::hidden('id') !!}
+    {!! Form::button('cancel',['class'=>'btn btn-info cancel-edit-studio pull-right']) !!}
     {!! Form::submit(null,['class'=>'btn btn-success pull-right']) !!}
     {!! Form::close() !!}
 </div>
