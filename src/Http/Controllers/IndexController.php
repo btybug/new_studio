@@ -51,7 +51,7 @@ class IndexController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \Response::json(['error' => true, 'messages' => $v->messages()]);
+            return redirect()->back()->with(['flash'=>['message'=>$v->messages()]]);
         }
         $file = $request->file;
         $file_name = $request->get('name', "new_" . str_random(4) . rand(111, 999));
