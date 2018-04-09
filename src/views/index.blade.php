@@ -33,31 +33,59 @@
 
                 </div>
                 <div>
-                    <button class="btn btn-primary show_form_for_setting">Settings</button>
-                    <button type="button" class="btn btn-info show_form"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-primary show_form_for_setting show_form">Settings</button>
+                    {{--<button type="button" class="btn btn-info show_form"><i class="fa fa-plus"></i></button>--}}
                 </div>
             </div>
             <div>
                 <div class="list">
-                    <ul>
-                        @foreach($studios as $studio)
-                            <li>
-                                <div class="title">{!! $studio->name !!}</div>
-                                <div class="title">{!! $studio->description !!}</div>
-                                <div class="title"><img width="100px"
-                                                        src="{!! url('public/images/new_studios',$studio->image ) !!}"></div>
-                                <div class="button">
-                                    <button data-id="{!! $studio->id !!}" class="btn btn-info edit-studio-btn"><i
-                                                class="fa fa-edit"></i></button>
-                                    <a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>
-                                    {!! Form::open(['url'=>route('new_studios_delete'),'class'=>'delete-studio']) !!}
-                                    {!! Form::hidden('id',$studio->id) !!}
-                                    <button type="submit" value="0" data-role="delete-studio-btn" class="btn btn-danger"><i class="fa fa-times"></i></button>
-                                    {!! Form::close() !!}
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>User</th>
+                            <th>Studio Type</th>
+                            <th>Css Data</th>
+                            <th>Html Data</th>
+                            <th>Json Data</th>
+                            <th>Adiational Data</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Nice button</td>
+                            <td>Abokamal</td>
+                            <td>Button Studio</td>
+                            <td>.nice-button{nice:100%}</td>
+                            <td>{!! "<button class='nice-button'></button>" !!}</td>
+                            <td>{'nice-button':{'nice':'100%'}}</td>
+                            <td></td>
+                            <td>Actions</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {{--<ul>--}}
+                        {{--@foreach($studios as $studio)--}}
+                            {{--<li>--}}
+                                {{--<div class="title">{!! $studio->name !!}</div>--}}
+                                {{--<div class="title">{!! $studio->description !!}</div>--}}
+                                {{--<div class="title"><img width="100px"--}}
+                                                        {{--src="{!! url('public/images/new_studios',$studio->image ) !!}"></div>--}}
+                                {{--<div class="button">--}}
+                                    {{--<button data-id="{!! $studio->id !!}" class="btn btn-info edit-studio-btn"><i--}}
+                                                {{--class="fa fa-edit"></i></button>--}}
+                                    {{--<a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a>--}}
+                                    {{--{!! Form::open(['url'=>route('new_studios_delete'),'class'=>'delete-studio']) !!}--}}
+                                    {{--{!! Form::hidden('id',$studio->id) !!}--}}
+                                    {{--<button type="submit" value="0" data-role="delete-studio-btn" class="btn btn-danger"><i class="fa fa-times"></i></button>--}}
+                                    {{--{!! Form::close() !!}--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                        {{--@endforeach--}}
+                    {{--</ul>--}}
                 </div>
 
             </div>
@@ -93,6 +121,58 @@
                                 <input type="file" name="file" class="form-control">
                             </div>
                             <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group  left_sd verticalcontainer">
+                            <div class="left_part_publ">
+                                <div>
+                                    <div class="row rows">
+                                        <div class="col-md-12 ">
+                                            <div class="col-md-6">
+                                                <div class="block-page">
+                                                    <i class="fa fa-universal-access" aria-hidden="true"></i><span
+                                                            class="labls">Page access</span>
+                                                    <div class="page-access">
+                                                        <div class="input-radio-1-bty">
+                                                            {!! Form::radio('page_access',0,true,['class' => 'access-radio' ,'id' =>'radios-0']) !!}
+                                                            <label for="radios-0">
+                                                                Public
+                                                            </label>
+                                                        </div>
+                                                        <div class="input-radio-1-bty">
+                                                            {!! Form::radio('page_access',1,null,['class' => 'access-radio','id' =>'radios-1']) !!}
+                                                            <label for="radios-1">
+                                                                Memberships
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="memberships-box {!! (0) ? '' : 'hide' !!}">
+                                                        <label>
+                                                            Select Memberships
+                                                        </label>
+                                                        {!! Form::select('memberships[]',$memberships,null,['class' => 'form-control memberships-select','multiple' => true]) !!}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="block-page">
+
+
+                                                    <i class="fa fa-universal-access" aria-hidden="true"></i><span
+                                                            class="labls">Special access</span>
+
+                                                    <div class="special-access">
+                                                        <label>
+                                                            Select
+                                                        </label>
+                                                        {!! Form::select('special_access[]',$specials,null,['class' => 'form-control special-select','multiple' => true]) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -315,11 +395,14 @@
         }
     </style>
     {!! HTML::style('public/js/dropzone/css/dropzone.min.css') !!}
+    {!! HTML::style("public/css/select2/select2.min.css") !!}
 @stop
 @section('JS')
     {!! HTML::script('public/js/dropzone/js/dropzone.js') !!}
     <script>
         $(document).ready(function () {
+            $(".memberships-select").select2();
+            $(".special-select").select2();
             var textarea_editor_for_save = {};
             var html = $("#get_for_append").html();
             $(".append_here").html(html);
@@ -420,4 +503,5 @@
             });
         });
     </script>
+    {!! HTML::script('public/js/select2/select2.full.min.js') !!}
 @stop

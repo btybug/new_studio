@@ -4,20 +4,28 @@ namespace BtyBugHook\NewStudio\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PhpJsonParser;
+use Btybug\User\Repository\MembershipRepository;
+use Btybug\User\Repository\SpecialAccessRepository;
 use BtyBugHook\NewStudio\Models\NewStudios;
 use BtyBugHook\NewStudio\Repository\NewStudiosRepository;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function getIndex(Request $request)
+    public function getIndex(
+        Request $request,
+        MembershipRepository $membershipRepository,
+        SpecialAccessRepository $specialAccessRepository
+    )
     {
+        $memberships = $membershipRepository->pluck('name','id')->toArray();
+        $specials = $specialAccessRepository->pluck('name','id')->toArray();
         $path = plugins_path('vendor' . DS . 'btybug.hook' . DS . 'newstudio' . DS . 'src' . DS . 'storage' . DS . 'studios');
         $directories = PhpJsonParser::getFoldersWithChildrens($path);
         $slug = $request->get('type');
         $group = $request->get('group');
         $studios = NewStudios::where("group", $group)->where('type', $slug)->get();
-        return view('newstudio::index', compact(['slug', 'directories', 'studios', 'group']));
+        return view('newstudio::index', compact(['slug', 'directories', 'studios', 'group','memberships','specials']));
     }
 
     public function createFolder()
