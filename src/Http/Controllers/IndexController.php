@@ -178,6 +178,11 @@ class IndexController extends Controller
 
     public function getAllStudios ()
     {
-        return view('newstudio::all', compact(''));
+        return view('newstudio::all-studios', compact(''));
+    }
+
+    public function getAllItems ()
+    {
+        return view('newstudio::all-items', compact(''));
     }
 }
