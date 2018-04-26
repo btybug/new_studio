@@ -43,6 +43,11 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/newstudio",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],[
+                    "title" => "All studios",
+                    "custom-link" => "/admin/newstudio/all-studios",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ]
             ]]);
 

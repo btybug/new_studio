@@ -175,4 +175,9 @@ class IndexController extends Controller
         return redirect()->back();
 
     }
+
+    public function getAllStudios ()
+    {
+        return view('newstudio::all', compact(''));
+    }
 }
